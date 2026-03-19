@@ -43,7 +43,7 @@ class HierarchicalForecaster:
 
     def create_hierarchy(self, train_data: pd.DataFrame) -> Dict[str, pd.DataFrame]:
         """
-        Создает иерархию агрегированных временных рядов с использованием СРЕДНИХ значений.
+        Создает иерархию агрегированных временных рядов с использованием средних значений.
 
         Returns:
         --------
@@ -68,7 +68,7 @@ class HierarchicalForecaster:
         print(f"  Всего уникальных товаров: {self.n_items_total}")
         print(f"  Всего уникальных магазинов: {self.n_stores_total}")
 
-        # Уровень 0: Total sales - используем СРЕДНИЕ продажи
+        # Уровень 0: Total sales - используем средние продажи
         total_series = (
             train_with_meta.groupby("date")["unit_sales"].mean().reset_index()
         )
@@ -144,8 +144,8 @@ class HierarchicalForecaster:
         model_params: Dict = None,
         max_history: Optional[int] = 90,
         external_data: Dict = None,
-        train_data: pd.DataFrame = None,  # исходные данные для создания признаков
-        val_data: pd.DataFrame = None,  # валидационные данные для создания признаков
+        train_data: pd.DataFrame = None,
+        val_data: pd.DataFrame = None,
     ):
         """
         Обучает модели на агрегированных рядах с поддержкой внешних признаков.
@@ -159,7 +159,7 @@ class HierarchicalForecaster:
         max_history : int, optional
             Максимальная длина истории
         external_data : Dict, optional
-            Словарь с внешними данными (нефть, праздники, транзакции)
+            Словарь с внешними данными (нефть, транзакции)
         train_data : pd.DataFrame, optional
             Исходные тренировочные данные для создания признаков (нужны для CatBoost)
         val_data : pd.DataFrame, optional

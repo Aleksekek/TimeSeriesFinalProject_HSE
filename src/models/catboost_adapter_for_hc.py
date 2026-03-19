@@ -9,7 +9,6 @@ from sklearn.dummy import DummyRegressor
 class CatBoostHierarchicalAdapter:
     """
     Адаптер для CatBoost, который работает с агрегированными рядами в иерархическом пайплайне.
-    Обучается на уровнях total, cluster и cluster+family, используя внешние признаки.
     """
 
     def __init__(
@@ -45,7 +44,7 @@ class CatBoostHierarchicalAdapter:
         self.use_external_features = use_external_features
         self.model = None
         self.feature_names = None
-        self.level_name = None  # будет установлен при необходимости
+        self.level_name = None
 
     def set_level_name(self, level_name: str):
         """Устанавливает имя уровня для логирования"""
@@ -260,7 +259,6 @@ class CatBoostHierarchicalAdapter:
             if best_iter is not None:
                 print(f"    ✅ Обучение завершено. Лучшая итерация: {best_iter}")
             else:
-                # Если best_iteration None, значит использовалась вся итерация
                 print(f"    ✅ Обучение завершено. Использовано итераций: {self.model.tree_count_}")
 
     def predict(self, horizon: int, last_data: pd.DataFrame, external_data: Dict = None) -> np.ndarray:

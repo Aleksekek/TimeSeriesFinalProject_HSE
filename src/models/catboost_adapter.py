@@ -201,7 +201,7 @@ class CatBoostAdapter:
 
 # Фабрика для создания адаптера
 def create_catboost_adapter(history=60, forecast_horizon=16):
-    """Создает прямой адаптер CatBoost"""
+    """Создает адаптер CatBoost"""
     return CatBoostAdapter(
         model_params={
             "iterations": 300,

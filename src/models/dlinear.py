@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore")
 class DLinear(nn.Module):
     """
     DLinear: Decomposition Linear Model
-    Разлагает ряд на тренд и сезонность, затем применяет линейные слои
+    Раскладывает ряд на тренд и сезонность, затем применяет линейные слои
     """
 
     def __init__(self, seq_len, pred_len, individual=False):
@@ -42,7 +42,6 @@ class DLinear(nn.Module):
             self.Linear_Trend = nn.Linear(seq_len, pred_len)
 
     def forward(self, x):
-        # x shape: [batch, seq_len, 1]
         x = x.squeeze(-1)  # [batch, seq_len]
 
         # Разложение на тренд (скользящее среднее)
